@@ -36,6 +36,8 @@ void fp_pattern_set_release(fp_pattern_t *pattern, fp_release_fn release);
 void fp_pattern_set_pattern(fp_pattern_t *pattern, const char *p);
 void fp_pattern_set_data(fp_pattern_t *pattern, void *data);
 void *fp_pattern_get_data(fp_pattern_t *pattern);
+void fp_pattern_set_include_tags(fp_pattern_t *pattern, bool include);
+bool fp_pattern_get_include_tags(fp_pattern_t *pattern);
 void fp_pattern_free(fp_pattern_t *pattern);
 
 bool fp_format_parse(fp_format_t *format, const char *input, int len,

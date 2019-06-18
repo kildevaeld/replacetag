@@ -16,6 +16,7 @@ struct fp_pattern_s {
   re_t pattern;
   fp_replace_fn replacer;
   fp_release_fn releaser;
+  bool include_tags;
   void *data;
 };
 
@@ -69,6 +70,7 @@ fp_pattern_t *fp_pattern_new(char open, char close, fp_replace_fn replace) {
   p->replacer = replace;
   p->releaser = NULL;
   p->data = NULL;
+  p->include_tags = false;
 
   return p;
 }
@@ -92,6 +94,14 @@ void fp_pattern_free(fp_pattern_t *pattern) {
   if (pattern == NULL)
     return;
   free(pattern);
+}
+
+void fp_pattern_set_include_tags(fp_pattern_t *pattern, bool include) {
+  pattern->include_tags = include;
+}
+
+bool fp_pattern_get_include_tags(fp_pattern_t *pattern) {
+  return pattern->include_tags;
 }
 
 static int match_or(const char *input, int len, fp_pattern_t *p) {
@@ -151,7 +161,9 @@ bool fp_format_parse(fp_format_t *format, const char *input, int len,
 
       int idx = out->len++;
 
-      if (!pp->replacer(input + i + 1, ni - 1, &out->chunks[idx], pp->data)) {
+      if (!pp->replacer(input + i + (!pp->include_tags ? 1 : 0),
+                        ni - (!pp->include_tags ? 1 : 0), &out->chunks[idx],
+                        pp->data)) {
         return false;
       }
       out->chunks[idx].pattern = pp;
