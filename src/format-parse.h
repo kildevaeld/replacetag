@@ -43,6 +43,7 @@ void fp_pattern_free(fp_pattern_t *pattern);
 bool fp_format_parse(fp_format_t *format, const char *input, int len,
                      fp_buffer_t *output);
 
+fp_buffer_t *fp_buffer_new();
 int fp_buffer_size(fp_buffer_t *buf);
 void fp_buffer_write(fp_buffer_t *buf, char *out);
 void fp_buffer_print(fp_buffer_t *buf);

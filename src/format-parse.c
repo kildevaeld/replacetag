@@ -182,6 +182,11 @@ bool fp_format_parse(fp_format_t *format, const char *input, int len,
   return true;
 }
 
+fp_buffer_t *fp_buffer_new() {
+  fp_buffer_t *buffer = malloc(sizeof(struct fp_buffer_s));
+  return buffer;
+}
+
 int fp_buffer_size(fp_buffer_t *buf) {
   int size = 0;
   for (int i = 0; i < buf->len; i++) {
@@ -222,4 +227,5 @@ void fp_buffer_free(fp_buffer_t *buf) {
                                        buf->chunks[i].pattern->data);
     }
   }
+  free(buf);
 }
