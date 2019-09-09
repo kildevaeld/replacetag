@@ -76,7 +76,7 @@ impl Replacer {
         }
     }
 
-    pub fn replace<'a>(&self, input: &'a str) -> ReplacerString {
+    pub fn replace(&self, input: &str) -> ReplacerString {
         let m = ReplacerString::new();
         unsafe {
             sys::fp_format_parse(

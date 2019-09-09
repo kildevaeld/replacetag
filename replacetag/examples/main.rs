@@ -13,8 +13,8 @@ fn main() {
 
     p2.pattern("[^*]");
 
-    rep.add_pattern(p);
-    rep.add_pattern(p2);
+    // rep.add_pattern(p);
+    // rep.add_pattern(p2);
 
     let out = rep.replace("Hello, *World* :smiley:");
 
